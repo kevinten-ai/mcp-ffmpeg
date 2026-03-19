@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+
+# IDE
+.cursor/
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+.python-version
+
+# Project
+output/
+tests/test_outputs/
+tests/example_outputs/
+tests/sample.mp4
+tests/sample.png
