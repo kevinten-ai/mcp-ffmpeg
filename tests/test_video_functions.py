@@ -1,45 +1,46 @@
 import os
-import sys
 import pytest
 import shutil
 import ffmpeg
 import subprocess
 import math
 
-# Add the parent directory to sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from ffmpeg_tools.server import mcp
+from ffmpeg_tools.utils import parse_time_to_seconds as _parse_time_to_seconds
 
-# Import the mcp server functions from server.py
-from server import (
-    health_check,
-    extract_audio_from_video,
-    trim_video,
-    convert_audio_properties,
-    convert_video_properties,
-    change_aspect_ratio,
-    convert_audio_format,
-    set_audio_bitrate,
-    set_audio_sample_rate,
-    set_audio_channels,
-    convert_video_format,
-    set_video_resolution,
-    set_video_codec,
-    set_video_bitrate,
-    set_video_frame_rate,
-    set_video_audio_track_codec,
-    set_video_audio_track_bitrate,
-    set_video_audio_track_sample_rate,
-    set_video_audio_track_channels,
-    add_subtitles,
-    add_text_overlay,
-    add_image_overlay,
-    concatenate_videos,
-    change_video_speed,
-    remove_silence,
-    add_b_roll,
-    add_basic_transitions,
-    _parse_time_to_seconds
-)
+
+def _registered_tool(name):
+    """Return the callable registered on the production FastMCP server."""
+    return mcp._tool_manager.get_tool(name).fn
+
+
+health_check = _registered_tool("health_check")
+extract_audio_from_video = _registered_tool("extract_audio_from_video")
+trim_video = _registered_tool("trim_video")
+convert_audio_properties = _registered_tool("convert_audio_properties")
+convert_video_properties = _registered_tool("convert_video_properties")
+change_aspect_ratio = _registered_tool("change_aspect_ratio")
+convert_audio_format = _registered_tool("convert_audio_format")
+set_audio_bitrate = _registered_tool("set_audio_bitrate")
+set_audio_sample_rate = _registered_tool("set_audio_sample_rate")
+set_audio_channels = _registered_tool("set_audio_channels")
+convert_video_format = _registered_tool("convert_video_format")
+set_video_resolution = _registered_tool("set_video_resolution")
+set_video_codec = _registered_tool("set_video_codec")
+set_video_bitrate = _registered_tool("set_video_bitrate")
+set_video_frame_rate = _registered_tool("set_video_frame_rate")
+set_video_audio_track_codec = _registered_tool("set_video_audio_track_codec")
+set_video_audio_track_bitrate = _registered_tool("set_video_audio_track_bitrate")
+set_video_audio_track_sample_rate = _registered_tool("set_video_audio_track_sample_rate")
+set_video_audio_track_channels = _registered_tool("set_video_audio_track_channels")
+add_subtitles = _registered_tool("add_subtitles")
+add_text_overlay = _registered_tool("add_text_overlay")
+add_image_overlay = _registered_tool("add_image_overlay")
+concatenate_videos = _registered_tool("concatenate_videos")
+change_video_speed = _registered_tool("change_video_speed")
+remove_silence = _registered_tool("remove_silence")
+add_b_roll = _registered_tool("add_b_roll")
+add_basic_transitions = _registered_tool("add_basic_transitions")
 
 # Path to the sample video file
 SAMPLE_VIDEO = os.path.join(os.path.dirname(__file__), "sample.mp4")
@@ -761,4 +762,4 @@ if __name__ == "__main__":
     test_add_b_roll()
     test_add_basic_transitions()
     test_concatenate_videos_with_xfade()
-    print("All tests completed!") 
+    print("All tests completed!")
