@@ -14,7 +14,6 @@ from ..utils import (
     decode_ffmpeg_error,
     get_media_properties,
     parse_time_to_seconds,
-    prepare_clip_for_concat,
 )
 
 

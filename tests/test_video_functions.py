@@ -1,12 +1,10 @@
 import os
 import pytest
-import shutil
 import ffmpeg
 import subprocess
 import math
 
 from ffmpeg_tools.server import mcp
-from ffmpeg_tools.utils import parse_time_to_seconds as _parse_time_to_seconds
 
 
 def _registered_tool(name):
@@ -509,8 +507,6 @@ def test_add_b_roll():
         pytest.skip("Skipping test_add_b_roll: Essential sample files are missing.")
 
     main_duration = get_media_duration(main_video)
-    broll1_duration = get_media_duration(broll1)
-    broll2_duration = get_media_duration(broll2)
 
     # Test 1: Fullscreen B-roll overlay
     output_path1 = os.path.join(OUTPUT_DIR, "broll_test1_fullscreen.mp4")
